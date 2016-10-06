@@ -33,8 +33,8 @@ bool GameScene::init(){
         return false;
     }
     
-    playBGM_1();
     initUI();
+    playBGM_1();
     initMap();
     
     return true;
@@ -42,20 +42,26 @@ bool GameScene::init(){
 #pragma mark 背景音乐_1
 void GameScene::playBGM_1(){
 
-    SimpleAudioEngine::getInstance()->playBackgroundMusic(s_music_Back2new ,false);
-    scheduleOnce(SEL_SCHEDULE(&GameScene::playBGM_2), 60);
+    if (!isPauseBGM) {
+        SimpleAudioEngine::getInstance()->playBackgroundMusic(s_music_Back2new ,false);
+        scheduleOnce(SEL_SCHEDULE(&GameScene::playBGM_2), 60);
+    }
 }
 #pragma mark 背景音乐_2
 void GameScene::playBGM_2(){
-
-    SimpleAudioEngine::getInstance()->playBackgroundMusic(s_music_Back3new, false);
-    scheduleOnce(SEL_SCHEDULE(&GameScene::playBGM_3), 62);
+    
+    if (!isPauseBGM) {
+        SimpleAudioEngine::getInstance()->playBackgroundMusic(s_music_Back3new, false);
+        scheduleOnce(SEL_SCHEDULE(&GameScene::playBGM_3), 62);
+    }
 }
 #pragma mark 背景音乐_3
 void GameScene::playBGM_3(){
     
-    SimpleAudioEngine::getInstance()->playBackgroundMusic(s_music_mainmenu, false);
-    scheduleOnce(SEL_SCHEDULE(&GameScene::playBGM_1), 65);
+    if (!isPauseBGM) {
+        SimpleAudioEngine::getInstance()->playBackgroundMusic(s_music_mainmenu, false);
+        scheduleOnce(SEL_SCHEDULE(&GameScene::playBGM_1), 65);
+    }
 }
 
 #pragma mark 初始化UI
